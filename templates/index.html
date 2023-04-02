@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Store</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    .btn {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 12px 24px;
+        border-radius: 4px;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    
+    .btn:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+	.btn-add-store {
+        font-size: 18px;
+        font-weight: bold;
+        padding: 14px 28px;
+        border-radius: 8px;
+        color: #fff;
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+    
+    .btn-add-store:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+		
+        .sheet-container {
+            position: relative;
+            padding-top: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .sheet-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Store</h1>
+        <form method="post" action="/shop" class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="store_name" class="sr-only">Store Name:</label>
+                <input type="text" class="form-control" id="store_name" name="store_name" placeholder="Store Name">
+            </div>
+			<button type="submit" class="btn btn-primary mb-2 btn-add-store">Add Store</button>
+        </form>
+        {% for shop_name, shop_id in shops_name.items() %}
+            <a href="http://localhost:8080/shop/{{ shop_id }}" class="btn btn-primary mb-2">{{ shop_name }}</a>
+        {% endfor %}
+        <div class="sheet-container">
+            {% if value %}
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3VC-kbAy5DViXJTBoAoOHnwrJ0vNIksn5nKZDEh3cNhy8COkoT6RF5mer2kwegzxSStOB1KDh96ey/pubhtml?gid={{ value }}&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+            {% else %}
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3VC-kbAy5DViXJTBoAoOHnwrJ0vNIksn5nKZDEh3cNhy8COkoT6RF5mer2kwegzxSStOB1KDh96ey/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+            {% endif %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.
