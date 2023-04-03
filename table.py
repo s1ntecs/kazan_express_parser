@@ -1,20 +1,16 @@
-from pprint import pprint
-from typing import Dict, List
+from typing import List
 import httplib2
 import apiclient.discovery
 from googleapiclient.errors import HttpError
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
-
-PUB_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT3VC-kbAy5DViXJTBoAoOHnwrJ0vNIksn5nKZDEh3cNhy8COkoT6RF5mer2kwegzxSStOB1KDh96ey'
+from cfg import PUB_URL, spreadsheet_id
 
 # Файл, полученный в Google Developer Console
 CREDENTIALS_FILE = 'credentials.json'
-# ID Google Sheets документа (можно взять из его URL)
-spreadsheet_id = '1o1dw6S9eQgxJOWg5Fb_TA36gISj4Bgb65fb2UKW1KUg'
 
 
-def get_data(start, end, sheet='makeyou'):
+def get_data(start: str, end: str, sheet: str = 'makeyou'):
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
         CREDENTIALS_FILE,
         ['https://www.googleapis.com/auth/spreadsheets',
@@ -33,7 +29,7 @@ def get_data(start, end, sheet='makeyou'):
     return values
 
 
-def write_data(service, product, i, sheet_name):
+def write_data(service, product, i: str, sheet_name: str):
     service.spreadsheets().values().batchUpdate(
         spreadsheetId=spreadsheet_id,
         body={
@@ -58,7 +54,6 @@ def write_data(service, product, i, sheet_name):
 def write_list_data(list_data: List,
                     range: str,
                     rows_or_col: str = "ROWS"):
-    print('write list data')
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
         CREDENTIALS_FILE,
         ['https://www.googleapis.com/auth/spreadsheets',
@@ -70,7 +65,7 @@ def write_list_data(list_data: List,
         body={
             "valueInputOption": "USER_ENTERED",
             "data": [
-                {"range": range,  # f"E3:E{(len(orders_today)+3)}",
+                {"range": range,
                  "majorDimension": rows_or_col,
                  "values": [list_data]}]
         }
@@ -122,7 +117,6 @@ def set_color(row_pos: int, column_pos: int, sheet_id: str,
 
 
 def sort_and_group(my_products_pos: List, sheet_id: str):
-    print('sort_and_group')
     my_products_pos.append(1000)
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
         CREDENTIALS_FILE,
@@ -158,7 +152,6 @@ def sort_and_group(my_products_pos: List, sheet_id: str):
 
 
 def clear_data(sheet_name: str):
-    print("clear data")
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
         CREDENTIALS_FILE,
         ['https://www.googleapis.com/auth/spreadsheets',
@@ -261,7 +254,6 @@ def create_sheet(sheet_name: str):
 
 
 def copy_sheet(sheet_name: str):
-    print('copy_sheet')
     date = datetime.now().strftime("%Y-%m-%d")
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
         CREDENTIALS_FILE,
@@ -280,5 +272,3 @@ def copy_sheet(sheet_name: str):
         spreadsheetId=spreadsheet_id, range=f"{sheet_name}!E1",
         valueInputOption='USER_ENTERED', body={'values': [[date]]})
     a.execute()
-
-# write_list_data(['29.3.2023'], "D1:D1")

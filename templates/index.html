@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Store</title>
+    <title>Kazanexpress Parser</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -52,13 +52,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>My Store</h1>
+        <h1>Kazanexpress Parser</h1>
         <form method="post" action="/shop" class="form-inline">
             <div class="form-group mx-sm-3 mb-2">
                 <label for="store_name" class="sr-only">Store Name:</label>
-                <input type="text" class="form-control" id="store_name" name="store_name" placeholder="Store Name">
+                <input type="text" class="form-control" id="store_name" name="store_name" placeholder="Название магазина">
             </div>
-			<button type="submit" class="btn btn-primary mb-2 btn-add-store">Add Store</button>
+			<button type="submit" class="btn btn-primary mb-2 btn-add-store">Добавить магазин</button>
         </form>
         {% for shop_name, shop_id in shops_name.items() %}
             <a href="http://localhost:8080/shop/{{ shop_id }}" class="btn btn-primary mb-2">{{ shop_name }}</a>

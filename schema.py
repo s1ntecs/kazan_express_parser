@@ -1,7 +1,6 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Dict, List, Union, Optional
-from marshmallow_dataclass import class_schema
-from marshmallow import Schema, EXCLUDE, fields
+from marshmallow import EXCLUDE
 
 
 @dataclass
@@ -83,6 +82,7 @@ class SkuList:
     class Meta:
         unknown = EXCLUDE
 
+
 @dataclass
 class Product:
     id: int
@@ -127,6 +127,7 @@ class Payload:
 
     class Meta:
         unknown = EXCLUDE
+
 
 @dataclass
 class Data():

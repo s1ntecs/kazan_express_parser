@@ -57,5 +57,5 @@ async def background_tasks(app):
     app['parser_listener'].cancel()
     await app['parser_listener']
 
-# app.cleanup_ctx.append(background_tasks)
+app.cleanup_ctx.append(background_tasks)
 web.run_app(app)

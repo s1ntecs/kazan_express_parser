@@ -1,20 +1,25 @@
+from dotenv import load_dotenv
 import os
+load_dotenv()
 
-query = ['лубрикант', 'вибратор']  # Список запросов
-table_id = '1KJBarCH76G2EyCPH7x6XyH2HK5QNfgKnkRerX73RFAM'  # ID текущего Google Sheet
-# Ссылка на ключ Google Sheet API
-creds_json = os.path.dirname(__file__) + '/keys/creds.json'
+# URL Google Sheets документа
+PUB_URL = os.getenv("PUB_URL")
+# ID Google Sheets документа (можно взять из его URL)
+spreadsheet_id = os.getenv("spreadsheet_id")
+# Токен авторизации для API в казань экспресс
+AUTH_KZN_TOKEN = os.getenv("AUTH_KZN_TOKEN")
 
-# Запросы для магазина
+UserAgent = """Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+ AppleWebKit/537.36 (KHTML, like Gecko)
+ Chrome/103.0.0.0 Safari/537.36"""
+
 list_headers = {
     'authority': 'dshop.kznexpress.ru',
     'accept': '*/*',
     'accept-language': 'ru-RU',
     'apollographql-client-name': 'web-customers',
     'apollographql-client-version': '1.29.9',
-    'authorization': 'Basic a2F6YW5leHByZXNzLWN1c3RvbWVyOmN1c3RvbWVyU2VjcmV0S2V5',
-    # Already added when you pass json=
-    # 'content-type': 'application/json',
+    'authorization': AUTH_KZN_TOKEN,
     'origin': 'https://kazanexpress.ru',
     'referer': 'https://kazanexpress.ru/',
     'sec-ch-ua': '".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"',
