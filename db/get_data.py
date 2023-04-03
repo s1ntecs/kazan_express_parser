@@ -1,8 +1,4 @@
 import asyncpg
-import asyncio
-from random import randint
-from typing import List
-from random import sample
 
 
 async def get_shops_name():
